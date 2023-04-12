@@ -1,7 +1,7 @@
 $(document).ready(function() {
     readHouse();
     createHouse();
-    EditHouse();
+    // EditHouse();
 })
 
 function createHouse(){
@@ -75,15 +75,15 @@ function readHouse(){
 
 }
 
-function EditHouse(){
+// function EditHouse(){
 
-    $('#houseEdit').click(function(){
-        $id=$(this).attr('name');
-        alert($id)
-        // $('#updateHouse').modal('show');
-        // $('#udistrict').val($id)
+//     $('#houseEdit').click(function(){
+//         $id=$(this).attr('name');
+//         alert($id)
+//         // $('#updateHouse').modal('show');
+//         // $('#udistrict').val($id)
 
 
-    })
+//     })
 
-}
+// }
