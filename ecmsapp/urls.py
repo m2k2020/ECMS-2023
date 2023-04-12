@@ -14,9 +14,21 @@ urlpatterns = [
     path('permissions/', views.permissions, name='permissions'),
     path('groups/', views.groups, name='groups'),
     path('roles/', views.roles, name='roles'),
+
+
+    #region Environment
+
     path('house/', views.house, name='house'),
+    path('createHouse/', views.createHouse, name='createHouse'),    
     path('Renter/', views.Renter, name='Renter'),
     path('Enviroment/', views.Enviroment, name='Enviroment'),
+
+    #endregion
+
+
+
+
+
     path('cleaning/', views.cleaning, name='cleaning'),
     path('Enviroment_cleaned/', views.Enviroment_cleaned, name='Enviroment_cleaned'),
     path('reports/', views.reports, name='reports'),
