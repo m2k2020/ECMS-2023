@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ecmsdb',
         'USER': 'postgres',
-        'PASSWORD': '4432',
+        'PASSWORD': '0207', #kaliya waxaaa ku kala duwan nahay password data baseka aniga wuxuu yahay 0207 adigna midkaaga ka dhigo
         'HOST': 'localhost',
         'PORT': '5432',
     }
