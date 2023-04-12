@@ -31,7 +31,7 @@ class Renter(models.Model):
 class Enviroment(models.Model):
     house = models.ForeignKey(House, on_delete=models.CASCADE)
     renter = models.ForeignKey(Renter, on_delete=models.CASCADE)
-    regoster_date = models.DateField()
+    register_date = models.DateField()
     status = models.IntegerField(default=0) # default 0 is Active and 1 is deactivated
 
 # --------------- Service Table -----------------
