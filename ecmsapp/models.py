@@ -14,7 +14,7 @@ class Users(models.Model):
 
 # --------------- House Table -----------------
 class House(models.Model):
-    district =models.CharField(max_length=15)
+    Enviroment =models.CharField(max_length=15)
     type = models.CharField(max_length=15)
     houseno = models.IntegerField()
     status = models.IntegerField(default=0) # default 0 is reserved for Active while 1 is reserved for Deleted

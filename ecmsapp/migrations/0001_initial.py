@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
             name='House',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('district', models.CharField(max_length=15)),
+                ('Enviroment', models.CharField(max_length=15)),
                 ('type', models.CharField(max_length=15)),
                 ('houseno', models.IntegerField()),
                 ('status', models.IntegerField(default=0)),

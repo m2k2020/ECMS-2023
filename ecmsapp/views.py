@@ -42,23 +42,23 @@ def roles(request):
 
 
 def house(request):
-    return render(request,'house.html')
+    return render(request,'Enviroment/house.html')
 
 
 def Renter(request):
-    return render(request,'renter.html')
+    return render(request,'Enviroment/renter.html')
 
 
-def district(request):
-    return render(request,'district.html')
+def Enviroment(request):
+    return render(request,'Enviroment/enviroment.html')
 
 
 def cleaning(request):
     return render(request,'cleaning.html')
 
 
-def district_cleaned(request):
-    return render(request,'district_cleaned.html')
+def Enviroment_cleaned(request):
+    return render(request,'Enviroment_cleaned.html')
 
 
 def reports(request):
