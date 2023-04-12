@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 # Create your views here.
 def index(request):
@@ -41,8 +41,35 @@ def roles(request):
     return render(request,'accounts/roles.html')
 
 
+#region Enviroment
+
+
+#region House
+
 def house(request):
+    if request.method == 'POST':
+        new_district = request.POST['district']
+        new_type = request.POST['type']
+        new_houseno = request.POST['houseno']
+        new_status = request.POST['status']
+
+        print(new_district, new_type, new_houseno, new_status)
+
+        
     return render(request,'Enviroment/house.html')
+
+def createHouse(request):
+    new_district = request.POST['district']
+    new_type = request.POST['type']
+    new_houseno = request.POST['district']
+    new_status = request.POST['status']
+
+    print(new_district, new_type, new_houseno, new_status)
+
+
+    return redirect('house')
+
+#endregion house
 
 
 def Renter(request):
@@ -51,6 +78,8 @@ def Renter(request):
 
 def Enviroment(request):
     return render(request,'Enviroment/enviroment.html')
+
+#endregion
 
 
 def cleaning(request):
