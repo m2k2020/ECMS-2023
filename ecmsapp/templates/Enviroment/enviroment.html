@@ -54,12 +54,12 @@
                         </thead>
                         <tbody id="tbody_data">
 
-                          {% for Enviroment in data %}
+                          {% for Enviroment in enviromentData %}
                           <tr>
                             <td>{{ Enviroment.id }}</td>
-                            <td>{{ Enviroment.name }}</td>
-                            <td>{{ Enviroment.tell }}</td>
-                            <td>{{ Enviroment.martial_status }}</td>
+                            <td>{{ Enviroment.regoster_data }}</td>
+                            <td>{{ Enviroment.house_id }}</td>
+                            <td>{{ Enviroment.renter_id }}</td>
                             <td>
                               <!-- <button class="btn btn-primary btn-sm ">
                                 <i data-feather="edit" ></i>
@@ -133,7 +133,7 @@
                       </select>
     
                       <label>Martial Status</label>
-                      <input type="date" name="" id="" class="form-control">
+                      <input type="date" id="regoster_date" class="form-control" required>
 
                     
                     </div>
@@ -158,7 +158,7 @@
         <!-- End Modal -->
 
 
-         <!-- Modal -->
+         <!-- Update Modal -->
          <div class="modal fade" id="updateEnviroment" tabindex="-1" role="dialog" aria-labelledby="userRegister" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
