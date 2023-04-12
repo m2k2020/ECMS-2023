@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import House,Renter
+from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
@@ -83,9 +84,7 @@ def createHouse(request):
 
 
 def renter(request):
-    
-
-    
+       
     renters = Renter.objects.filter(status=0)
     context = {'data':renters}
 
@@ -102,7 +101,24 @@ def renter(request):
 
 
 def Enviroment(request):
-    return render(request,'Enviroment/enviroment.html')
+    houses = House.objects.filter(status=0)
+    renters = Renter.objects.filter(status=0)
+    context = {
+        'houseData': houses,
+        'renterData': renters
+    }
+    return render(request,'Enviroment/enviroment.html',context)
+
+
+
+def fetch_data(request):
+    # data = House.objects.values("id","district","type","houseno")
+    data = House.objects.filter(status=0)
+    result=[]
+    for row in data:
+        result.append(row)
+    print(result)
+    return JsonResponse(result, safe=False)
 
 #endregion
 
