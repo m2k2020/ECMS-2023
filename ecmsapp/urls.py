@@ -20,7 +20,7 @@ urlpatterns = [
 
     path('house/', views.house, name='house'),
     path('createHouse/', views.createHouse, name='createHouse'),    
-    path('Renter/', views.Renter, name='Renter'),
+    path('Renter/', views.renter, name='Renter'),
     path('Enviroment/', views.Enviroment, name='Enviroment'),
 
     #endregion
