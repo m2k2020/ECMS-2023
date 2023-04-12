@@ -15,6 +15,8 @@ urlpatterns = [
     path('groups/', views.groups, name='groups'),
     path('roles/', views.roles, name='roles'),
 
+    path('fetch_data/',views.fetch_data, name='fetch_data'),
+
 
     #region Environment
 
