@@ -1,5 +1,7 @@
 $(document).ready(function() {
+    readHouse();
     createHouse();
+    EditHouse();
 })
 
 function createHouse(){
@@ -14,8 +16,6 @@ function createHouse(){
         if($District != null && $Type != null && $HouseNo != null && $status == 0) {
             
             // console.log($District + " " + $Type + " " + $HouseNo+ " " + $status)
-
-
             $.ajax({
                 url: '',
                 type: "POST",
@@ -38,6 +38,7 @@ function createHouse(){
                     .then(function(){
 
                         $('#newUser').hide();
+                        readHouse()
                         location.reload();
                     })
 
@@ -55,4 +56,30 @@ function createHouse(){
 
 
     })
+}
+
+function readHouse(){
+
+    $.ajax({
+        url: "house/",
+        type: "POST",
+        async: false,
+        data:{
+            res : 1,
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function(response){
+            $('#tbody_data').html(response)
+        }
+    })
+
+}
+
+function EditHouse(){
+
+    $('#houseEdit').click(function(){
+        $('#updateHouse').modal('show');
+
+    })
+
 }
