@@ -1,3 +1,13 @@
 $(document).ready(function() {
-    alert("test")
+    createHouse();
 })
+
+function createHouse(){
+    $('#registerForm').submit(function (e){
+        e.preventDefault();
+        $('#')
+        alert("clicked Button")
+        $('#newUser').hide();
+        location.reload()
+    })
+}
