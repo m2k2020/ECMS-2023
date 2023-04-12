@@ -29,20 +29,20 @@ class Renter(models.Model):
 
 # --------------- Enviroment Table -----------------
 class Enviroment(models.Model):
-    house_id = models.ForeignKey(House, on_delete=models.CASCADE)
-    renter_id = models.ForeignKey(Renter, on_delete=models.CASCADE)
+    house = models.ForeignKey(House, on_delete=models.CASCADE)
+    renter = models.ForeignKey(Renter, on_delete=models.CASCADE)
     regoster_date = models.DateField()
     status = models.IntegerField(default=0) # default 0 is Active and 1 is deactivated
 
 # --------------- Service Table -----------------
 class Service(models.Model):
-    enviroment_id = models.ForeignKey(Enviroment,on_delete=models.CASCADE)
+    enviroment = models.ForeignKey(Enviroment,on_delete=models.CASCADE)
     date = models.DateField()
     status = models.IntegerField(default=0) # default 0 is active and 1 is deactivated
 
 # --------------- Transaction Table -----------------
 class Transaction(models.Model):
-    service_id = models.ForeignKey(Service,on_delete= models.CASCADE)
+    service = models.ForeignKey(Service,on_delete= models.CASCADE)
     account = models.CharField(max_length=7)
     price = models.IntegerField()
     date = models.DateField()
