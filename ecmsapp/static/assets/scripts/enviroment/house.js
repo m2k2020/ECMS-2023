@@ -78,7 +78,11 @@ function readHouse(){
 function EditHouse(){
 
     $('#houseEdit').click(function(){
-        $('#updateHouse').modal('show');
+        $id=$(this).attr('name');
+        alert($id)
+        // $('#updateHouse').modal('show');
+        // $('#udistrict').val($id)
+
 
     })
 
