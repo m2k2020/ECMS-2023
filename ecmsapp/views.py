@@ -45,8 +45,8 @@ def house(request):
     return render(request,'house.html')
 
 
-def house_holder(request):
-    return render(request,'house_holder.html')
+def Renter(request):
+    return render(request,'renter.html')
 
 
 def district(request):
