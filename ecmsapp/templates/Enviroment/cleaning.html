@@ -46,30 +46,29 @@
                         <thead>
                           <tr>
                             <th>#</th>
-                            <th>Renter</th>
-                            <th>House</th>
+                            <th>Enviromet</th>
                             <th>Date</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody id="tbody_data">
 
-                          {% for Enviroment in enviromentData %}
+                          {% for Services in serviceData %}
                           <tr>
-                            <td>{{ Enviroment.id }}</td>
-                            <td>{{ Enviroment.renter.name }}</td>
-                            <td>{{ Enviroment.house.district }}-{{ Enviroment.house.houseno }} ({{ Enviroment.house.type }}) </td>
-                            <td>{{ Enviroment.register_date }}</td>
+                            <td>{{ Services.id }}</td>
+                            <td>{{ Services.enviroment.house.type }} - {{ Services.enviroment.house.district }}</td>
+                            <td>{{ Services.date }}</td>
+                            
                             <td>
                               <!-- <button class="btn btn-primary btn-sm ">
                                 <i data-feather="edit" ></i>
                                 
                               </button> -->
-                              <a class="btn btn-primary btn-sm EnviromentEdit" name="{{ Enviroment.id }}" data-toggle="modal" data-target="#updateEnviroment" data-id="{{ Enviroment.id }}">
+                              <a class="btn btn-primary btn-sm EnviromentEdit" name="{{ Services.id }}" data-toggle="modal" data-target="#updateEnviroment" data-id="{{ Services.id }}">
                                 <i data-feather="edit"></i>
                               </a>
 
-                              <a class="btn btn-danger btn-sm EnviromentDelete" name="{{ Enviroment.id }}" data-toggle="modal" data-target="#updateEnviroment">
+                              <a class="btn btn-danger btn-sm EnviromentDelete" name="{{ Services.id }}" data-toggle="modal" data-target="#updateEnviroment">
                                 <i data-feather="trash"></i>
                               </a>
                               
@@ -81,9 +80,8 @@
                         <tfooter>
                           <tr>
                             <th>#</th>
-                            <th>District</th>
-                            <th>Enviroment Type</th>
-                            <th>Enviroment No</th>
+                            <th>Enviromet</th>
+                            <th>Date</th>
                             <th>Action</th>
                           </tr>
                         </tfooter>
