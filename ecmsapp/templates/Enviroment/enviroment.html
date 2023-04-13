@@ -46,9 +46,9 @@
                         <thead>
                           <tr>
                             <th>#</th>
-                            <th>Enviroment Name</th>
-                            <th>Enviroment Tell</th>
-                            <th>Martial Status</th>
+                            <th>Renter</th>
+                            <th>House</th>
+                            <th>Date</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -57,9 +57,9 @@
                           {% for Enviroment in enviromentData %}
                           <tr>
                             <td>{{ Enviroment.id }}</td>
-                            <td>{{ Enviroment.regoster_data }}</td>
-                            <td>{{ Enviroment.house_id }}</td>
-                            <td>{{ Enviroment.renter_id }}</td>
+                            <td>{{ Enviroment.renter.name }}</td>
+                            <td>{{ Enviroment.house.district }}-{{ Enviroment.house.houseno }} ({{ Enviroment.house.type }}) </td>
+                            <td>{{ Enviroment.register_date }}</td>
                             <td>
                               <!-- <button class="btn btn-primary btn-sm ">
                                 <i data-feather="edit" ></i>
