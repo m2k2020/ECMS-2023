@@ -15,16 +15,9 @@ def register(request):
 def forgot(request):
     return render(request,'accounts/forgot.html')
 
-def all_users(request):
-    return render(request,'accounts/all_users.html')
-
-
-def admins(request):
-    return render(request,'accounts/admins.html')
-
 
 def staffs(request):
-    return render(request,'accounts/staff.html')
+    return render(request,'accounts/staffs.html')
 
 
 
