@@ -44,14 +44,28 @@ function createRenter(){
 
                 },
                 error:function(data){
-                    console.log("Erro is "+data)
+                    swal({
+                        title: "Error !",
+                        text: "There was an error: "+data,
+                        icon: "error",
+                        timer: 4000, // time in milliseconds
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    })
                 }
             })
 
             
         }
         else{
-            alert("Error");
+            swal({
+                title: "Error !",
+                text: "There was an error for Saving",
+                icon: "error",
+                timer: 4000, // time in milliseconds
+                timerProgressBar: true,
+                showConfirmButton: false
+            })
         }
 
 
