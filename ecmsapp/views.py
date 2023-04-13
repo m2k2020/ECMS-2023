@@ -103,11 +103,11 @@ def renter(request):
 def enviroment(request):
     houses = House.objects.filter(status=0)
     renters = Renter.objects.filter(status=0)
-    # enivroments = Enviroment.objects.filter(status=0)
+    enivroments = Enviroment.objects.filter(status=0)
     context = {
         'houseData': houses,
         'renterData': renters,
-        # 'enviromentData':enivroments
+        'enviromentData':enivroments
     }
 
     if request.method == 'POST':
@@ -117,7 +117,8 @@ def enviroment(request):
         new_status = request.POST['status']
 
         if new_house != "" and new_renter != "" and new_date != "" and new_status != "":
-            add_environment = Enviroment(house_id=new_house,renter_id=new_renter,regoster_date=new_date,status=new_status,)
+            # print(f"{new_date} {new_status} {new_house} {new_renter}")
+            add_environment = Enviroment(register_date=new_date,status=new_status,house_id=new_house,renter_id=new_renter,)
             add_environment.save()
     return render(request,'Enviroment/enviroment.html',context)
 
