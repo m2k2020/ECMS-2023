@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    readEnviroment();
     createEnviroment();
 
    
@@ -39,42 +40,56 @@ function createEnviroment(){
                     .then(function(){
 
                         $('#newEnviroment').hide();
-                        // readHouse()
+                        readEnviroment()
                         location.reload();
                     })
 
                 },
                 error:function(data){
-                    console.log("Erro is "+data)
+                    swal({
+                        title: "Error !",
+                        text: "There was an error: "+data,
+                        icon: "error",
+                        timer: 4000, // time in milliseconds
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    })
                 }
             })
 
             
         }
         else{
-            alert("Error");
+            swal({
+                title: "Error !",
+                text: "There was an error for Saving",
+                icon: "error",
+                timer: 4000, // time in milliseconds
+                timerProgressBar: true,
+                showConfirmButton: false
+            })
         }
 
 
     })
 }
 
-// function readHouse(){
+function readEnviroment(){
 
-//     $.ajax({
-//         url: "house/",
-//         type: "POST",
-//         async: false,
-//         data:{
-//             res : 1,
-//             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
-//         },
-//         success: function(response){
-//             $('#tbody_data').html(response)
-//         }
-//     })
+    $.ajax({
+        url: "enviroment/",
+        type: "POST",
+        async: false,
+        data:{
+            res : 1,
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function(response){
+            $('#tbody_data').html(response)
+        }
+    })
 
-// }
+}
 
 // function EditHouse(){
 
