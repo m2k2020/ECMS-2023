@@ -8,13 +8,19 @@ function createHouse(){
     $('#registerForm').submit(function (e){
         e.preventDefault();
 
-        $District = $('#district').val();
+        $District = $("#district").val();
+        $DistrictApr = $("#district option:selected").data("foo");
         $Type = $('#type').val();
         $HouseNo = $('#houseno').val();
+        $HouseNumber = $DistrictApr + "" + $HouseNo
         $status = 0
 
-        if($District != null && $Type != null && $HouseNo != null && $status == 0) {
+        
+        if($District != null && $DistrictApr != null && $Type != null && $HouseNo != null && $HouseNumber != null && $status == 0) {
             
+            // alert(`Option Value: ${$District}\ndata-foo: ${$DistrictApr}\nHouseNumer: ${$HouseNumber}`);
+       
+     
             // console.log($District + " " + $Type + " " + $HouseNo+ " " + $status)
             $.ajax({
                 url: '',
@@ -22,7 +28,7 @@ function createHouse(){
                 data: {
                     'district': $District,
                     'type': $Type,
-                    'houseno': $HouseNo,
+                    'houseno': $HouseNumber,
                     'status': $status,
                     csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()                    
                 },
@@ -47,11 +53,19 @@ function createHouse(){
                     console.log("Erro is "+data)
                 }
             })
+         
 
             
         }
         else{
-            alert("Error");
+                swal({
+                        title: "Error !",
+                        text: "There was an error for Saving",
+                        icon: "error",
+                        timer: 4000, // time in milliseconds
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    })
         }
 
 
