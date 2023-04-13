@@ -150,7 +150,7 @@ def cleaning(request):
         new_status = request.POST['status']
 
         if new_enviroments != "" and new_date != "" and new_status != "":
-            add_services = Service(date=new_date,status=new_status,enviroment=new_enviroments)
+            add_services = Service(date=new_date,status=new_status,enviroment_id=new_enviroments)
             add_services.save()
     return render(request,'Enviroment/cleaning.html',context)
 
