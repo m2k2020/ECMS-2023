@@ -50,7 +50,15 @@ function createHouse(){
 
                 },
                 error:function(data){
-                    console.log("Erro is "+data)
+                    swal({
+                        title: "Error !",
+                        text: "There was an error: "+data,
+                        icon: "error",
+                        timer: 4000, // time in milliseconds
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    })
+                    // console.log("Erro is "+data)
                 }
             })
          
