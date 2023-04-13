@@ -27,21 +27,6 @@ def staffs(request):
     return render(request,'accounts/staff.html')
 
 
-def clients(request):
-    return render(request,'accounts/clients.html')
-
-
-def permissions(request):
-    return render(request,'accounts/permissions.html')
-
-
-def groups(request):
-    return render(request,'accounts/groups.html')
-
-
-def roles(request):
-    return render(request,'accounts/roles.html')
-
 
 #region Enviroment
 
@@ -155,8 +140,6 @@ def cleaning(request):
     return render(request,'Enviroment/cleaning.html',context)
 
 
-def Enviroment_cleaned(request):
-    return render(request,'Enviroment_cleaned.html')
 
 
 def reports(request):
