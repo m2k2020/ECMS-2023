@@ -137,7 +137,11 @@ def fetch_data(request):
 
 
 def cleaning(request):
-    return render(request,'cleaning.html')
+    enviroments = Enviroment.objects.filter(status=0)
+    context = {
+        'enviroData':enviroments
+    }
+    return render(request,'Enviroment/cleaning.html',context)
 
 
 def Enviroment_cleaned(request):
@@ -145,17 +149,17 @@ def Enviroment_cleaned(request):
 
 
 def reports(request):
-    return render(request,'reports.html')
+    return render(request,'Enviroment/reports.html')
 
 
 def Payment_Method(request):
-    return render(request,'Payment_Method.html')
+    return render(request,'Enviroment/Payment_Method.html')
 
 
 def Transaction(request):
-    return render(request,'Transaction.html')
+    return render(request,'Enviroment/Transaction.html')
 
 
 def Reports2(request):
-    return render(request,'Reports2.html')
+    return render(request,'Enviroment/Reports2.html')
 
