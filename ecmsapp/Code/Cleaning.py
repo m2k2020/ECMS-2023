@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from models import Service,Enviroment
+from ecmsapp.models import Service,Enviroment
 from django.http import JsonResponse
 
 # Create your views here.
