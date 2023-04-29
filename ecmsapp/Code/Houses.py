@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from models import House
+from ecmsapp.models import House
 from django.http import JsonResponse
 
 # Create your views here.
