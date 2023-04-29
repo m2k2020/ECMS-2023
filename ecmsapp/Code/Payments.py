@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from models import Users
+from ecmsapp.models import Users
 from django.http import JsonResponse
 
 # Create your views here.
