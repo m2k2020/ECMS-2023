@@ -1,24 +1,25 @@
 from django.urls import path
 from ecmsapp import views
+from .Code import Accounts,Cleaning,Enviroments,Houses,Payments,Renter,Reports,Transactions
 
 
 urlpatterns = [
     path('', views.index, name='index'),
 
-    path('login/', views.login, name='login'),
-    path('register/', views.register, name='register'),
-    path('forgot/', views.forgot, name='forgot'),
-    path('staffs/', views.staffs, name='staffs'),
+    path('login/', Accounts.login, name='login'),
+    path('register/', Accounts.register, name='register'),
+    path('forgot/', Accounts.forgot, name='forgot'),
+    path('staffs/', Accounts.staffs, name='staffs'),
 
-    path('fetch_data/',views.fetch_data, name='fetch_data'),
+    path('fetch_data/',Houses.fetch_data, name='fetch_data'),
 
 
     #region Environment
 
-    path('house/', views.house, name='house'),
-    path('createHouse/', views.createHouse, name='createHouse'),    
-    path('Renter/', views.renter, name='Renter'),
-    path('Enviroment/', views.enviroment, name='Enviroment'),
+    path('house/', Houses.house, name='house'),
+    path('createHouse/', Houses.createHouse, name='createHouse'),    
+    path('Renter/', Renter.renter, name='Renter'),
+    path('Enviroment/', Enviroments.enviroment, name='Enviroment'),
 
     #endregion
 
@@ -26,10 +27,10 @@ urlpatterns = [
 
 
 
-    path('cleaning/', views.cleaning, name='cleaning'),
+    path('cleaning/', Cleaning.cleaning, name='cleaning'),
     
-    path('reports/', views.reports, name='reports'),
-    path('Payment_Method/', views.Payment_Method, name='Payment_Method'),
-    path('Transaction/', views.Transaction, name='Transaction'),
-    path('Reports2/', views.Reports2, name='Reports2'),
+    path('reports/', Reports.reports, name='reports'),
+    path('Payment_Method/', Payments.Payment_Method, name='Payment_Method'),
+    path('Transaction/', Transactions.Transaction, name='Transaction'),
+    path('Reports2/', Reports.Reports2, name='Reports2'),
 ]
