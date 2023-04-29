@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from models import House,Renter,Enviroment,Service,Users,Transaction
+from models import Users
 from django.http import JsonResponse
 
 # Create your views here.
