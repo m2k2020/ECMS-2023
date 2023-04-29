@@ -17,7 +17,15 @@ urlpatterns = [
     #region Environment
 
     path('house/', Houses.house, name='house'),
-    path('createHouse/', Houses.createHouse, name='createHouse'),    
+    path('createHouse/', Houses.createHouse, name='createHouse'),
+    path('updateHouse/', Houses.update_house, name='updateHouse'),
+    path('deleteHouse/', Houses.delete_house, name='deleteHouse'),
+
+
+
+
+
+
     path('Renter/', Renter.renter, name='Renter'),
     path('Enviroment/', Enviroments.enviroment, name='Enviroment'),
 
