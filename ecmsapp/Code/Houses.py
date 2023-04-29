@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from ecmsapp.models import House
 from django.http import JsonResponse
 
@@ -10,6 +10,24 @@ def house(request):
     houses = House.objects.filter(status=0) 
     context = {'data': houses}
 
+    # if request.method == 'POST':
+    #     new_district = request.POST['district']
+    #     new_type = request.POST['type']
+    #     new_houseno = request.POST['houseno']
+    #     new_status = request.POST['status']
+
+    #     if new_district != "" and new_type != "" and new_houseno != "" and new_status != "":
+    #         add_house = House(district=new_district, type=new_type, houseno=new_houseno, status=new_status)
+    #         add_house.save()
+    #     else:
+    #         print("bad")
+
+        
+    return render(request,'Enviroment/house.html',context)
+
+
+
+def createHouse(request):
     if request.method == 'POST':
         new_district = request.POST['district']
         new_type = request.POST['type']
@@ -19,23 +37,58 @@ def house(request):
         if new_district != "" and new_type != "" and new_houseno != "" and new_status != "":
             add_house = House(district=new_district, type=new_type, houseno=new_houseno, status=new_status)
             add_house.save()
+            isError = True
+            return HttpResponse(isError)
         else:
-            print("bad")
+            isError = False
+            return HttpResponse(isError)
+
+
+
+def update_house(request):
+    if request.method == 'POST':
+        id = request.POST.get('id')
+        district = request.POST.get('district')
+        type = request.POST.get('type')
+        houseno = request.POST.get('houseno')
 
         
-    return render(request,'Enviroment/house.html',context)
+        houseUpdate = House.objects.get(id=id)
 
-def createHouse(request):
-    new_district = request.POST['district']
-    new_type = request.POST['type']
-    new_houseno = request.POST['district']
-    new_status = request.POST['status']
+        houseUpdate.district = district
+        houseUpdate.type = type
+        houseUpdate.houseno = houseno
 
-    print(new_district, new_type, new_houseno, new_status)
+        houseUpdate.save()
 
+        isError = False
+        if isError:
+            message = "Failure updating"
+            return HttpResponse(message)
+        else:
+            message = "Successfully Update"
+            return HttpResponse(message)
 
-    return redirect('house')
+def delete_house(request):
+    if request.method == 'POST':
+        id = request.POST.get('id')
+        status = request.POST.get('status')
 
+        
+        houseUpdate = House.objects.get(id=id)
+
+        houseUpdate.status = status
+
+        houseUpdate.save()
+
+        isError = False
+        if isError:
+            message = "Failure Deleting"
+            return HttpResponse(message)
+        else:
+            message = "Successfully Deleted"
+            return HttpResponse(message)
+    
 
 
 
