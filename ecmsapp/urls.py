@@ -24,9 +24,10 @@ urlpatterns = [
 
 
 
-
-
     path('Renter/', Renter.renter, name='Renter'),
+    path('updateRenter/', Renter.update_renter, name='updateRenter'),
+
+
     path('Enviroment/', Enviroments.enviroment, name='Enviroment'),
 
     #endregion
