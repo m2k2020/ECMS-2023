@@ -65,7 +65,15 @@
                                 <i data-feather="edit" ></i>
                                 
                               </button> -->
-                              <a class="btn btn-primary btn-sm RenterEdit" name="{{ Renter.id }}" data-toggle="modal" data-target="#updateRenter" data-id="{{ Renter.id }}">
+                              <a 
+                              class="btn btn-primary btn-sm RenterEdit" 
+                              data-toggle="modal"  
+                              data-id="{{ Renter.id }}"
+                              data-name="{{ Renter.name }}"
+                              data-tell="{{ Renter.tell }}"
+                              data-martial_status="{{ Renter.martial_status }}"
+                             
+                              >
                                 <i data-feather="edit"></i>
                               </a>
 
@@ -164,25 +172,30 @@
               <div class="modal-body">
                 {% csrf_token %}
 
-                <form method="POST" id="UpdateForm">
+                <form method="POST" id="updateForm">
                   <div class="form-group">
-                    <label>District</label>
-                    <input type="text" class="form-control" id="district" required>
-    
-                    <label>Renter Type</label>
-                    <select id="type" class="form-control" required>
+                    <label>Renter Name</label>
+                    <input type="text" class="form-control" id="uname" required>
+                    
+                    <input type="text" hidden class="form-control" id="uid" required>
+
+                    <label>Renter Tell</label>
+                    <input type="text" class="form-control" id="utell" required>
+  
+                    <label>Martial Status</label>
+                    <select id="umartial_status" class="form-control" required>
                       <option value="">Select one of them </option>
-                      <option value="Apartement">Apartment </option>
-                      <option value="Villo">Villo</option>
-                      <option value="Jiingad">Jiingad</option>
+                      <option value="Single">Single </option>
+                      <option value="Married">Married</option>
                     </select>
 
-                    <label>Renter No</label>
-                    <input type="number" class="form-control" id="Renterno" placeholder="e.g 001" required>
+                  
                   </div>
+
+                  
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" id="btnUpdate" class="btn btn-primary">Save</button>                  
+                    <button type="submit" id="btnSave" class="btn btn-primary">Save</button>                  
         
                   </div>
 
