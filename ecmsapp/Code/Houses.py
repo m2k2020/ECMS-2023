@@ -68,6 +68,9 @@ def update_house(request):
         else:
             message = "Successfully Update"
             return HttpResponse(message)
+        
+
+        
 
 def delete_house(request):
     if request.method == 'POST':
