@@ -1,7 +1,7 @@
 $(document).ready(function() {
     readRenter();
     createRenter();
-    // EditRenter();
+    EditRenter();
 })
 
 function createRenter(){
@@ -89,15 +89,62 @@ function readRenter(){
 
 }
 
-// function EditRenter(){
+function EditRenter(){
+    $('.RenterEdit').click(function(){
+        $id = $(this).data('id');
+        $name = $(this).data('name');
+        $tell = $(this).data('tell');
+        $martial_status = $(this).data('martial_status');
 
-//     $('#RenterEdit').click(function(){
-//         $id=$(this).attr('name');
-//         alert($id)
-//         // $('#updateRenter').modal('show');
-//         // $('#udistrict').val($id)
+        $('#updateRenter').modal('show');
+
+        $("#uid").val($id)
+        $("#uname").val($name)
+        $("#utell").val($tell)
+        $("#umartial_status").val($martial_status)
 
 
-//     })
+        $('#updateForm').submit(function (e) {
+            e.preventDefault();
 
-// }
+            $new_id = $("#uid").val()
+            $new_name = $("#uname").val()
+            $new_tell = $("#utell").val()
+            $new_martial = $("#umartial_status").val()
+
+
+
+
+            $.ajax({
+                url: '/updateRenter/',
+                type: "POST",
+                data: {
+                    'id': $new_id,
+                    'name': $new_name,
+                    'tell': $new_tell,
+                    'martial_status': $new_martial,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() 
+                },
+              
+                success: function(data) {
+                  
+                    swal("Success", data, "success")
+                    .then(function(){
+                        $('#UpdateRenter').hide();
+                        readRenter()
+                        location.reload();
+                    })
+
+                },
+                error: function(data){
+                   
+                    swal("Error", data, "error");
+                }
+            })
+
+        })
+
+
+        
+    })
+}
