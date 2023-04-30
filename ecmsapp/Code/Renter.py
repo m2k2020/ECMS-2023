@@ -45,3 +45,28 @@ def update_renter(request):
         else:
             message = "Successfully Update"
             return HttpResponse(message)
+        
+    
+
+
+def delete_renter(request):
+    if request.method == 'POST':
+        id = request.POST.get('id')
+        status = request.POST.get('status')
+
+        
+        renterUpdate = Renter.objects.get(id=id)
+
+        renterUpdate.status = status
+
+        renterUpdate.save()
+
+        isError = False
+        if isError:
+            message = "Failure Deleting"
+            return HttpResponse(message)
+        else:
+            message = "Successfully Deleted"
+            return HttpResponse(message)
+    
+
