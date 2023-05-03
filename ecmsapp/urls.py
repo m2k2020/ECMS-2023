@@ -25,10 +25,14 @@ urlpatterns = [
 
 
     path('Renter/', Renter.renter, name='Renter'),
+    path('createRenter/', Renter.createRenter, name='createRenter'),
     path('updateRenter/', Renter.update_renter, name='updateRenter'),
+    path('deleteRenter/', Renter.delete_renter, name='deleteRenter'),
 
 
     path('Enviroment/', Enviroments.enviroment, name='Enviroment'),
+    path('createEnviroment/', Enviroments.createEnviroment, name='createEnviroment'),
+    path('getEnviroment/', Enviroments.get_environment, name='getEnviroment'),
 
     #endregion
 

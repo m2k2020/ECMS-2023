@@ -9,7 +9,11 @@ def renter(request):
        
     renters = Renter.objects.filter(status=0)
     context = {'data':renters}
+    return render(request,'Enviroment/renter.html',context)
 
+
+
+def createRenter(request):
     if request.method == 'POST':
         new_name = request.POST['name']
         new_tell = request.POST['tell']
@@ -19,7 +23,11 @@ def renter(request):
         if new_name != "" and new_tell != "" and new_martial_status != "" and new_status != "":
             add_renter = Renter(name=new_name, tell=new_tell, martial_status=new_martial_status, status=new_status)
             add_renter.save()
-    return render(request,'Enviroment/renter.html',context)
+            isError = True
+            return HttpResponse(isError)
+        else:
+            isError = False
+            return HttpResponse(isError)
 
 def update_renter(request):
     if request.method == 'POST':
@@ -53,6 +61,8 @@ def delete_renter(request):
     if request.method == 'POST':
         id = request.POST.get('id')
         status = request.POST.get('status')
+
+        # print(f"{id} {status}")
 
         
         renterUpdate = Renter.objects.get(id=id)

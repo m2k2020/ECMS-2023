@@ -32,7 +32,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Cleaning</h4>
+                    <h4>Services</h4>
                   </div>
                   <!-- Button trigger modal -->
                    
@@ -46,9 +46,11 @@
                         <thead>
                           <tr>
                             <th>#</th>
-                            <th>Enviromet</th>
+                            <th>Renter</th>
+                            <th>District</th>
+                            <th>House Type</th>
+                            <th>House Mo</th>
                             <th>Date</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody id="tbody_data">
@@ -56,33 +58,22 @@
                           {% for Services in serviceData %}
                           <tr>
                             <td>{{ Services.id }}</td>
-                            <td>{{ Services.enviroment.house.type }} - ( {{ Services.enviroment.house.district }} - {{ Services.enviroment.house.houseno }} )</td>
+                            <td>{{ Services.enviroment.renter.name }}</td>
+                            <td>{{ Services.enviroment.house.district }}</td>
+                            <td>{{ Services.enviroment.house.type }}</td>
+                            <td>{{ Services.enviroment.house.houseno }}</td>
                             <td>{{ Services.date }}</td>
-                            
-                            <td>
-                              <!-- <button class="btn btn-primary btn-sm ">
-                                <i data-feather="edit" ></i>
-                                
-                              </button> -->
-                              <a class="btn btn-primary btn-sm EnviromentEdit" name="{{ Services.id }}" data-toggle="modal" data-target="#updateEnviroment" data-id="{{ Services.id }}">
-                                <i data-feather="edit"></i>
-                              </a>
-
-                              <a class="btn btn-danger btn-sm EnviromentDelete" name="{{ Services.id }}" data-toggle="modal" data-target="#updateEnviroment">
-                                <i data-feather="trash"></i>
-                              </a>
-                              
-                                
-                            </td>
                           </tr>
                           {% endfor %}
                         </tbody>
                         <tfooter>
                           <tr>
                             <th>#</th>
-                            <th>Enviromet</th>
+                            <th>Renter</th>
+                            <th>District</th>
+                            <th>House Type</th>
+                            <th>House Mo</th>
                             <th>Date</th>
-                            <th>Action</th>
                           </tr>
                         </tfooter>
 

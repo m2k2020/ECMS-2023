@@ -1,6 +1,7 @@
 $(document).ready(function() {
     readEnviroment();
     createEnviroment();
+    EditEnviroment();
 
    
 
@@ -19,7 +20,7 @@ function createEnviroment(){
             
             // console.log($District + " " + $Type + " " + $HouseNo+ " " + $status)
             $.ajax({
-                url: '',
+                url: '/createEnviroment/',
                 type: "POST",
                 data: {
                     'houseno': $HouseNo,
@@ -91,15 +92,55 @@ function readEnviroment(){
 
 }
 
-// function EditHouse(){
 
-//     $('#houseEdit').click(function(){
-//         $id=$(this).attr('name');
-//         alert($id)
-//         // $('#updateHouse').modal('show');
-//         // $('#udistrict').val($id)
+function EditEnviroment(){
+
+    $('.EnviromentEdit').click(function(){
+        
+        $id = $(this).data('id');
+
+        $.ajax({
+            url: "/getEnviroment/",
+            type: "GET",
+            data: {
+                'id': $id
+            },
+            success:function (response){
+
+                console.log(response)
+
+                $('#updateEnviroment').modal('show');
+
+                $house = response.house_no
+
+                $('#uid').val($house)
+                // $('#urenter').val($renter)
+                // $('#uregoster_date').val($date)
+                // $('#uid').val($renter)
+
+                
+                
+            },
+            error: function(response) {
+                // Handle errors
+                console.log('Error:', response);
+            }
+        })
+        // $renter = $(this).data('renter');
+        // $house = $(this).data('house');
+        // $date = $(this).data('date');
+
+        // alert($id+ " " +$renter+ " " +$house + " " +$date)
+
+        // $('#updateEnviroment').modal('show');
+
+        // $('#uhouseno').val($house)
+        // $('#urenter').val($renter)
+        // $('#uregoster_date').val($date)
+        // $('#uid').val($renter)
 
 
-//     })
 
-// }
+    })
+
+}

@@ -2,6 +2,7 @@ $(document).ready(function() {
     readRenter();
     createRenter();
     EditRenter();
+    DeleteRemter();
 })
 
 function createRenter(){
@@ -17,7 +18,7 @@ function createRenter(){
             
             // console.log($District + " " + $Type + " " + $RenterNo+ " " + $status)
             $.ajax({
-                url: '',
+                url: '/createRenter/',
                 type: "POST",
                 data: {
                     'name': $Name,
@@ -147,4 +148,68 @@ function EditRenter(){
 
         
     })
+}
+
+function DeleteRemter(){
+
+    $('.RenterDelete').click(function (){
+        $id= $(this).data('id');
+        // alert($id)
+        swal({
+            title: "Are you sure?",
+            text: "Do you really want to delete this record?",
+            icon: "warning",
+            buttons: ['No', 'Yes'],
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if(willDelete){
+                // alert($id)
+                $status = 1
+
+                $.ajax({
+                    url: '/deleteRenter/',
+                    type: "POST",
+                    data: {
+                        'id': $id,
+                        'status': $status,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() 
+                    },
+                  
+                    success: function(data) {
+                      
+                        swal("Success", data, "success")
+                        .then(function(){
+                            // $('#UpdateHouse').hide();
+                            readRenter()
+                            location.reload();
+                        })
+    
+                    },
+                    error: function(data){
+                       
+                        swal("Error", data, "error");
+                       
+                    }
+                })
+
+
+            }
+            else {
+                swal({
+                    title: "Canceled !",
+                    text: "You have successfully Cancelled",
+                    icon: "error",
+                    timer: 3000, // time in milliseconds
+                    timerProgressBar: true,
+                    showConfirmButton: true
+                }).then(function () {
+                    location.reload()
+
+                })
+            }
+        })
+
+    })
+
 }

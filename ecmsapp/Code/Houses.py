@@ -10,18 +10,6 @@ def house(request):
     houses = House.objects.filter(status=0) 
     context = {'data': houses}
 
-    # if request.method == 'POST':
-    #     new_district = request.POST['district']
-    #     new_type = request.POST['type']
-    #     new_houseno = request.POST['houseno']
-    #     new_status = request.POST['status']
-
-    #     if new_district != "" and new_type != "" and new_houseno != "" and new_status != "":
-    #         add_house = House(district=new_district, type=new_type, houseno=new_houseno, status=new_status)
-    #         add_house.save()
-    #     else:
-    #         print("bad")
-
         
     return render(request,'Enviroment/house.html',context)
 
@@ -70,7 +58,7 @@ def update_house(request):
             return HttpResponse(message)
         
 
-        
+
 
 def delete_house(request):
     if request.method == 'POST':
