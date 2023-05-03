@@ -126,7 +126,30 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  ...
+                  <form method="POST" id="updateForm">
+                    <div class="form-group">
+                    <label>Renter</label>
+                    <select id="service" class="form-control" required>
+                      <option value="">Select......</option>
+                      {% for service in dataService %}
+                          <option value="{{service.id}}">
+                            {{service.enviroment.renter.name}} 
+                            ({{service.enviroment.house.district}} - {{service.enviroment.house.houseno}}) - 
+                            {{service.date}} 
+                          </option>
+                      {% endfor %}
+                    </select>
+
+                    <label>Payment Method</label>
+                    <select id="account" class="form-control" required>
+                      <option value="">Select......</option>
+                     
+                          <option value="EVC">By Evc-Plus </option>
+                          <option value="Cash">By Cash</option>
+                    </select>
+
+                    </div>
+                  </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
