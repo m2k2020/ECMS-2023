@@ -1,5 +1,7 @@
+import datetime
 from django.shortcuts import render,redirect
 from ecmsapp.models import Service,Transaction
+from datetime import date
 from django.http import JsonResponse
 
 # Create your views here.
@@ -7,8 +9,18 @@ from django.http import JsonResponse
 
 def transaction(request):
     serviceList = Service.objects.filter(status=0)
+    alltransactions = Transaction.objects.filter(status=0)
+    get_last_id = Transaction.objects.order_by('-id').first()
+    current_year = datetime.datetime.now().year
+
+    today = date.today()
+
     data = {
-        'dataService': serviceList
+        'dataService': serviceList,
+        'dataTransaction': alltransactions,
+        'today': today,
+        'currentYear': current_year,
+        'getLastId': get_last_id
     }
     return render(request,'Enviroment/Transaction.html',data)
 
