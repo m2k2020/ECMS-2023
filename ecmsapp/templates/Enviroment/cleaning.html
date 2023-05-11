@@ -38,11 +38,14 @@
                    
                   <div class="card-body">
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newServices">
-                        <i data-feather="user-plus"></i>
-                    </button>
+                        <i data-feather="user-plus"></i><br>
+                    </button><br>
+
+                    
+                  
 
                     <div class="table-responsive">
-                      <table class="table table-striped table-hover" id="save-stage" style="width:100%;">
+                      <table class="table table-striped" id="table-1">
                         <thead>
                           <tr>
                             <th>#</th>
@@ -51,18 +54,34 @@
                             <th>House Type</th>
                             <th>House Mo</th>
                             <th>Date</th>
+                            <th>Fee</th>
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody id="tbody_data">
 
                           {% for Services in serviceData %}
                           <tr>
-                            <td>{{ Services.id }}</td>
+                            <td>{{ forloop.counter }}</td>
                             <td>{{ Services.enviroment.renter.name }}</td>
                             <td>{{ Services.enviroment.house.district }}</td>
                             <td>{{ Services.enviroment.house.type }}</td>
                             <td>{{ Services.enviroment.house.houseno }}</td>
                             <td>{{ Services.date }}</td>
+                            {% if Services.process == 'Un-Paid' %}
+                            <td style="color: red;">-$5.00</td>
+                            <td>
+                              <button class="btn btn-warning payfee" data-id="{{Services.id}}">
+                                Pay
+                              </button>
+                              {% elif Services.process == 'Paid' %}
+                              <td style="color: green;">$5.00</td>
+                              <td>
+                                <span class="badge badge-success">Paid
+                                </span>
+                              </td>
+                              {% endif %}
+                            </td>
                           </tr>
                           {% endfor %}
                         </tbody>
@@ -74,6 +93,8 @@
                             <th>House Type</th>
                             <th>House Mo</th>
                             <th>Date</th>
+                            <th>Fee</th>
+                            <th>Action</th>
                           </tr>
                         </tfooter>
 
@@ -167,6 +188,60 @@
 
                     <label>Enviroment No</label>
                     <input type="number" class="form-control" id="Enviromentno" placeholder="e.g 001" required>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" id="btnUpdate" class="btn btn-primary">Save</button>                  
+        
+                  </div>
+
+                </form>
+
+              </div>
+              <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      <!-- End Modal -->
+
+
+         <!-- Payment Modal -->
+         <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="userRegister" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="userRegister">Pay Fee </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                {% csrf_token %}
+
+                <form method="POST" id="PaymentForm">
+                  <div class="form-group">
+                    
+                    <input type="text" class="form-control" id="servid" hidden required>
+    
+
+                    <label>Payment Method</label>
+                    <select id="account" class="form-control" required>
+                      <option value="">Select......</option>
+                     
+                          <option value="EVC Plus">Evc-Plus </option>
+                          <option value="Cash">Cash</option>
+                          <option value="Merchent">Merchent</option>
+                    </select>
+
+                    
+                    <label>Date </label>
+                    <input type="date"id="dateSer" class="form-control" required>
+
+                    <label>Price </label>
+                    <input type="number"id="price" class="form-control"disabled placeholder="$5.00">
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

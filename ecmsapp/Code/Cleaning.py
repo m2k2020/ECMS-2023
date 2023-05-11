@@ -1,6 +1,7 @@
-from django.shortcuts import render,redirect
-from ecmsapp.models import Service,Enviroment
+from django.shortcuts import render,redirect,HttpResponse
+from ecmsapp.models import Service,Enviroment,House
 from django.http import JsonResponse
+from django.db.models import Q
 
 # Create your views here.
 
@@ -8,11 +9,14 @@ from django.http import JsonResponse
 
 
 def cleaning(request):
+    district =House.objects.values('district').distinct()
+    
     enviroments = Enviroment.objects.filter(status=0)
     cleaning = Service.objects.filter(status=0)
     context = {
         'enviroData':enviroments,
-        'serviceData':cleaning
+        'serviceData':cleaning,
+        'district':district
     }
 
     if request.method == 'POST':

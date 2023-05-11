@@ -120,13 +120,13 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="userRegister">Registeration User</h5>
+                  <h5 class="modal-title" id="userRegister">New Transaction</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form method="POST" id="updateForm">
+                  <form method="POST" id="registerForm">
                     <div class="form-group">
                     <label>Renter</label>
                     <select id="service" class="form-control" required>
@@ -147,6 +147,14 @@
                           <option value="EVC">By Evc-Plus </option>
                           <option value="Cash">By Cash</option>
                     </select>
+
+                    <label>Price </label>
+                    <input type="number"id="price" class="form-control"disabled placeholder="$5.00">
+                    
+                    <label>Date </label>
+                    <input type="date"id="date" class="form-control" required>
+                    
+
 
                     </div>
                   </form>

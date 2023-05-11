@@ -1,6 +1,7 @@
 $(document).ready(function() {
     readClean();
     createClean();
+    MakePayment();
     // EditClean();
 })
 
@@ -86,6 +87,69 @@ function readClean(){
     })
 
 }
+
+function MakePayment(){
+    $('.payfee').click(function(){
+        $id = $(this).data('id');
+        $('#paymentModal').modal('show');
+        $('#servid').val($id)
+
+        $('#PaymentForm').submit(function(e){
+            e.preventDefault();
+            $services_id = $('#servid').val()
+            $account = $('#account').val()
+            $dateSer = $('#dateSer').val()
+            $price = 5
+            $status = 0
+
+            // alert($services_id+" "+$account+" "+$dateSer+"  "+$price)
+
+            $.ajax({
+                url: "/makepayment/",
+                type: 'POST',
+                data: {
+                    'service':$services_id,
+                    'account':$account,
+                    'date':$dateSer,
+                    'price':$price,
+                    'status':$status,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()  
+                },
+                success: function(response){
+                    swal({
+                        title: "Success !",
+                        text: response.message,
+                        icon: "success",
+                        timer: 8000, // time in milliseconds
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    })
+                    .then(function(){
+
+                        $('#paymentModal').hide();
+                        // readClean()
+                        location.reload();
+                    })
+
+                },
+                error:function(error){
+                    swal({
+                        title: "Error !",
+                        text: 'OPS Not Saved!',
+                        icon: "error",
+                        timer: 4000, // time in milliseconds
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    })
+
+                }
+            })
+
+
+        })
+    })
+}
+
 
 // function EditClean(){
 

@@ -38,10 +38,11 @@ class Service(models.Model):
     date = models.DateField()
     status = models.IntegerField(default=0) # default 0 is active and 1 is deactivated
     enviroment = models.ForeignKey(Enviroment,on_delete=models.CASCADE)
+    process = models.CharField(max_length=15,default='Un-Paid')
 
 # --------------- Transaction Table -----------------
 class Transaction(models.Model):
-    account = models.CharField(max_length=7)
+    account = models.CharField(max_length=10)
     price = models.IntegerField()
     date = models.DateField()
     status = models.IntegerField(default=0) # default 0 is active and 1 is deactivated

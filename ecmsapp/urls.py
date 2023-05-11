@@ -42,8 +42,14 @@ urlpatterns = [
 
     path('cleaning/', Cleaning.cleaning, name='cleaning'),
     
+    path('Transaction/', Transactions.transaction, name='Transaction'),
+    path('makepayment/', Transactions.makePayment, name='makepayment'),
+
+
+
+
+
     path('reports/', Reports.reports, name='reports'),
     path('Payment_Method/', Payments.Payment_Method, name='Payment_Method'),
-    path('Transaction/', Transactions.Transaction, name='Transaction'),
     path('Reports2/', Reports.Reports2, name='Reports2'),
 ]
