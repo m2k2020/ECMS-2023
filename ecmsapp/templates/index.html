@@ -19,13 +19,16 @@
             <div class="card card-primary">
               <div class="card-header">
                 <h4>Login</h4>
+                {% if error_message %}
+                    <p>{{ error }}</p>
+                    {% endif %}
               </div>
               <div class="card-body">
-                {% csrf_token %}
-                <form method="POST" id="loginForm" action="{% url 'login' %}">
+                  <form method="POST" id="loginForm">
+                    {% csrf_token %}
                   <div class="form-group">
-                    <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+                    <label for="username">username</label>
+                    <input id="username" type="text" class="form-control" name="username" tabindex="1" required autofocus>
                     <div class="invalid-feedback">
                       Please fill in your email
                     </div>
@@ -41,6 +44,13 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    {% for message in messages %}
+
+                    <div class="alert alert-danger" role="alert">
+                      {{message}}
+                    </div>
+
+                    {%endfor%}
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                       Login
                     </button>

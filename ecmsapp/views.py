@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from .models import House,Renter,Enviroment,Service,Users,Transaction
 from django.http import JsonResponse
 from django.db.models import Sum
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def index(request):
@@ -46,6 +48,24 @@ def index(request):
 
         }
     return render(request, 'main.html',data)
+
+def user_login(request):
+     if request.user.is_authenticated:
+        messages.info(request, 'alredy login')
+        return redirect(index)
+     if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+       
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        else:
+            messages.info( request, 'User or Password are Incorrect.')
+            return render(request,'index.html')
+
+     return render(request,'index.html')
 
 
 
