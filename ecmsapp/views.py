@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import House,Renter,Enviroment,Service,Users,Transaction
 from django.http import JsonResponse
+from django.db.models import Sum
 
 # Create your views here.
 def index(request):
@@ -16,6 +17,15 @@ def index(request):
     exisiSerService =Service.objects.filter(status=0)
     deleteSerService =Service.objects.filter(status=1)
 
+    totalAmmount = Transaction.objects.aggregate(Sum('price'))['price__sum']
+
+    evc = Transaction.objects.filter(account='EVC Plus').aggregate(Sum('price'))['price__sum']
+    cash = Transaction.objects.filter(account='Cash').aggregate(Sum('price'))['price__sum']
+
+    print(evc)
+    print(cash)
+
+    
 
     data = {
         'countExistHouses':exisitHouses.count(),
@@ -26,6 +36,7 @@ def index(request):
         'countdeletetEnviroment':deleteEnviroment.count(),
         'countExistSerService':exisiSerService.count(),
         'countdeletetSerService':deleteSerService.count(),
+        'totalAmount':totalAmmount
         }
     return render(request, 'main.html',data)
 
