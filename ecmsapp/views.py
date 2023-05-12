@@ -21,9 +21,10 @@ def index(request):
 
     evc = Transaction.objects.filter(account='EVC Plus').aggregate(Sum('price'))['price__sum']
     cash = Transaction.objects.filter(account='Cash').aggregate(Sum('price'))['price__sum']
+    merchant = Transaction.objects.filter(account='Merchent').aggregate(Sum('price'))['price__sum']
 
-    print(evc)
-    print(cash)
+    topTransaction = Transaction.objects.all().order_by('-id')[:5]
+    topEnviroment = Enviroment.objects.all().order_by('-id')[:5]
 
     
 
@@ -36,7 +37,13 @@ def index(request):
         'countdeletetEnviroment':deleteEnviroment.count(),
         'countExistSerService':exisiSerService.count(),
         'countdeletetSerService':deleteSerService.count(),
-        'totalAmount':totalAmmount
+        'totalAmount':totalAmmount,
+        'topTransaction':topTransaction,
+        'topEnviroment':topEnviroment,
+        'EvcAccount':evc,
+        'CashAccount':cash,
+        'MerchantAccount':merchant,
+
         }
     return render(request, 'main.html',data)
 
