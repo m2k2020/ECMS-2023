@@ -4,9 +4,10 @@ from .Code import Accounts,Cleaning,Enviroments,Houses,Payments,Renter,Reports,T
 
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.user_login, name='user_login'),
+    path("logout_view/",Accounts.logout_view, name="logout_view"),
+    path('index/', views.index, name='index'),
 
-    path('login/', Accounts.login, name='login'),
     path('register/', Accounts.register, name='register'),
     path('forgot/', Accounts.forgot, name='forgot'),
     path('staffs/', Accounts.staffs, name='staffs'),
