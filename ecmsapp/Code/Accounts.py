@@ -17,12 +17,6 @@ def logout_view(request):
     return redirect('user_login')
 
 
-def register(request):
-    return render(request,'accounts/register.html')
-
-def forgot(request):
-    return render(request,'accounts/forgot.html')
-
 
 def staffs(request):
     users = User.objects.all()
@@ -94,3 +88,34 @@ def disableAccount(request):
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
+def myprofile(request):
+    
+    return render (request, "accounts/myprofile.html")
+
+
+def changepassword(request):
+    
+    if request.method == 'POST':
+        id = request.POST.get('id')
+        password = request.POST.get('password')
+        
+
+        userupdatePassword = User.objects.get(id=id)
+        
+        userupdatePassword.set_password(password)
+        userupdatePassword.save()
+
+        
+        if userupdatePassword:
+            msg = f"{userupdatePassword.first_name} {userupdatePassword.last_name}'s Successfully Changed Password"
+            response = {
+                'success': True,
+                'message': msg
+            }
+            return JsonResponse(response)
+        else:
+            messages.error(request,f"{userupdatePassword.username}'s Not Changed Password")
+            return redirect(myprofile)
+    else:
+
+        return redirect(myprofile)
