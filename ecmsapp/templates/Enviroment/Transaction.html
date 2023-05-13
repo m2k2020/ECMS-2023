@@ -53,6 +53,7 @@
                             <tr>
                               <th>#</th>
                               <th>Payer</th>
+                              <th>Account</th>
                               <th>Date</th>
                               <th>price</th>
                               <th>Action</th>
@@ -65,8 +66,11 @@
                             <tr>
                               <td>{{forloop.counter}}</td>
                               <td>{{data.service.enviroment.renter.name}}- 
-                                ({{data.service.enviroment.renter.tell}})
+                                ({{data.service.enviroment.renter.tell}}) - 
+                                Degmada {{data.service.enviroment.house.district}} ({{data.service.enviroment.house.type}}-
+                                {{data.service.enviroment.house.houseno}})
                               </td>
+                              <td>{{data.account}}</td>
                               <td>{{data.date|timesince}}</td>
                               <td>${{data.price}}.00</td>
                               <td>
@@ -93,9 +97,10 @@
                           <tfooter>
                             <tr>
                               <th>#</th>
-                              <th>Renter Name</th>
-                              <th>Renter Tell</th>
-                              <th>Martial Status</th>
+                              <th>Payer</th>
+                              <th>Account</th>
+                              <th>Date</th>
+                              <th>price</th>
                               <th>Action</th>
                             </tr>
                           </tfooter>
