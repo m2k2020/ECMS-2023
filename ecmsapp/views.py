@@ -32,7 +32,7 @@ def index(request):
 
     totalUsers = User.objects.all()
 
-    print(merchant)
+    # print(merchant)
 
     
 
