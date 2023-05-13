@@ -11,11 +11,8 @@ urlpatterns = [
     path('adduser/', Accounts.addUser, name='adduser'),
     path('activeAccount/', Accounts.activeAccount, name='activeAccount'),
     path('disableAccount/', Accounts.disableAccount, name='disableAccount'),
-
-
-    
-    path('register/', Accounts.register, name='register'),
-    path('forgot/', Accounts.forgot, name='forgot'),
+    path("myprofile/",Accounts.myprofile, name="myprofile"),    
+    path("changepassword/",Accounts.changepassword, name="changepassword"),
     path('Empolyee/', Accounts.staffs, name='Empolyee'),
 
     path('fetch_data/',Houses.fetch_data, name='fetch_data'),
