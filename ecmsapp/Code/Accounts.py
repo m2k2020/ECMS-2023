@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.models import User, Group, Permission
 
 # Create your views here.
 
@@ -24,4 +25,8 @@ def forgot(request):
 
 
 def staffs(request):
-    return render(request,'accounts/staffs.html')
+    users = User.objects.all()
+    data = {
+        'users': users
+    }
+    return render(request,'accounts/staffs.html',data)
