@@ -137,7 +137,7 @@
           {% if user.is_authenticated %}
           <div class="dropdown-title">{{user.first_name}} {{user.last_name}}</div>
           {% endif %}
-          <a href="profile.html" class="dropdown-item has-icon"> <i class="far
+          <a href="{% url 'myprofile' %}" class="dropdown-item has-icon"> <i class="far
                                     fa-user"></i> Profile
           </a> 
           <div class="dropdown-divider"></div>
