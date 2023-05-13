@@ -8,6 +8,12 @@ urlpatterns = [
     path("logout_view/",Accounts.logout_view, name="logout_view"),
     path('index/', views.index, name='index'),
 
+    path('adduser/', Accounts.addUser, name='adduser'),
+    path('activeAccount/', Accounts.activeAccount, name='activeAccount'),
+    path('disableAccount/', Accounts.disableAccount, name='disableAccount'),
+
+
+    
     path('register/', Accounts.register, name='register'),
     path('forgot/', Accounts.forgot, name='forgot'),
     path('Empolyee/', Accounts.staffs, name='Empolyee'),
