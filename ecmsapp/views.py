@@ -4,6 +4,8 @@ from django.http import JsonResponse
 from django.db.models import Sum
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User, Group, Permission
+
 
 # Create your views here.
 def index(request):
@@ -28,6 +30,10 @@ def index(request):
     topTransaction = Transaction.objects.all().order_by('-id')[:5]
     topEnviroment = Enviroment.objects.all().order_by('-id')[:5]
 
+    totalUsers = User.objects.all()
+
+    # print(merchant)
+
     
 
     data = {
@@ -39,6 +45,7 @@ def index(request):
         'countdeletetEnviroment':deleteEnviroment.count(),
         'countExistSerService':exisiSerService.count(),
         'countdeletetSerService':deleteSerService.count(),
+        'totalUsers':totalUsers.count(),
         'totalAmount':totalAmmount,
         'topTransaction':topTransaction,
         'topEnviroment':topEnviroment,

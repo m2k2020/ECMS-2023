@@ -55,7 +55,7 @@
                     <div class="padding-20">
                       <div class="text-right">
                         <h3 class="font-light mb-0">
-                          <i class="ti-arrow-up text-success"></i> 9 {{network}}
+                          <i class="ti-arrow-up text-success"></i> {{totalUsers}}
                         </h3>
                         <span class="text-muted">Total Users</span>
                       </div>
@@ -197,7 +197,11 @@
                     <div class="padding-20">
                       <div class="text-right">
                         <h3 class="font-light mb-0">
+                          {% if MerchantAccount == None %}
+                          <i class="ti-arrow-up text-success"></i>$0.00
+                          {% else %}
                           <i class="ti-arrow-up text-success"></i>${{ MerchantAccount }}.00
+                          {% endif %}
                         </h3>
                         <span class="text-muted">Total Merchant</span>
                       </div>
