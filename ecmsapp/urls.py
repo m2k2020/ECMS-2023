@@ -10,7 +10,7 @@ urlpatterns = [
 
     path('register/', Accounts.register, name='register'),
     path('forgot/', Accounts.forgot, name='forgot'),
-    path('staffs/', Accounts.staffs, name='staffs'),
+    path('Empolyee/', Accounts.staffs, name='Empolyee'),
 
     path('fetch_data/',Houses.fetch_data, name='fetch_data'),
 
