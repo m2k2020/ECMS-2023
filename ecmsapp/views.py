@@ -28,6 +28,8 @@ def index(request):
     topTransaction = Transaction.objects.all().order_by('-id')[:5]
     topEnviroment = Enviroment.objects.all().order_by('-id')[:5]
 
+    print(merchant)
+
     
 
     data = {
