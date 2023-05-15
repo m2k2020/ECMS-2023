@@ -39,8 +39,13 @@ def staffs(request):
     }
     return render(request,'accounts/staffs.html',data)
 
+
 @login_required(login_url='user_login')
 def addUser(request):
+    
+    user_agent_string = request.META.get('HTTP_USER_AGENT')
+    user_agent = parse(user_agent_string)
+    userinfo = f'{ipaddress} / {user_agent}'
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -57,15 +62,24 @@ def addUser(request):
         user.save()
         if user:
             # print(first_name,last_name,email,user_name)
-            msg = f'{first_name} {last_name} has been Successfuly Saved'
-            return JsonResponse({'success': True, 'message': msg})
+            info = f'{first_name} {last_name} has been Successfuly Saved'
+            msg = f"User Has Been Successfully Added {first_name} {last_name} to the System"
+            userLoggers(logger_name=request.user,device=userinfo,message=msg,level="INFO").save()
+            return JsonResponse({'success': True, 'message': info})
         else:
+            msg = f"User Has Not Successfully Added {first_name} {last_name} to the System"
+            userLoggers(logger_name=request.user,device=userinfo,message=msg,level="INFO").save()
             return JsonResponse({'success': False, 'message': 'Not Successfully added'})
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request method'})
     
+
+    
 @login_required(login_url='user_login')
 def activeAccount(request):
+    user_agent_string = request.META.get('HTTP_USER_AGENT')
+    user_agent = parse(user_agent_string)
+    userinfo = f'{ipaddress} / {user_agent}'
     if request.method == 'POST':
         id = request.POST.get('id')
         password = request.POST.get('password')
@@ -77,15 +91,25 @@ def activeAccount(request):
         user.save()
         if user:
             # print(first_name,last_name,email,user_name)
-            msg = f'{user.first_name} {user.last_name} has been Successfuly Activated'
-            return JsonResponse({'success': True, 'message': msg})
+            info = f'{user.first_name} {user.last_name} has been Successfuly Activated'
+            msg = f"User has been Successfuly Activated {user.first_name} {user.last_name} to the system"
+            userLoggers(logger_name=request.user,device=userinfo,message=msg,level="INFO").save()
+
+            return JsonResponse({'success': True, 'message': info})
         else:
+            msg = f"User has Not Successfuly Activated {user.first_name} {user.last_name} to the system"
+            userLoggers(logger_name=request.user,device=userinfo,message=msg,level="INFO").save()
             return JsonResponse({'success': False, 'message': 'Not Successfully Activted'})
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request method'})
     
+
+
 @login_required(login_url='user_login')
 def disableAccount(request):
+    user_agent_string = request.META.get('HTTP_USER_AGENT')
+    user_agent = parse(user_agent_string)
+    userinfo = f'{ipaddress} / {user_agent}'
     if request.method == 'POST':
         id = request.POST.get('id')
         status = False
@@ -95,12 +119,18 @@ def disableAccount(request):
         user.save()
         if user:
             # print(first_name,last_name,email,user_name)
-            msg = f'{user.first_name} {user.last_name} has been Successfuly Disabled'
-            return JsonResponse({'success': True, 'message': msg})
+            info = f'{user.first_name} {user.last_name} has been Successfuly Disabled'
+            msg = f"User has been Successfuly Disabled {user.first_name} {user.last_name} to the system"
+            userLoggers(logger_name=request.user,device=userinfo,message=msg,level="INFO").save()
+            return JsonResponse({'success': True, 'message': info})
         else:
+            msg = f"User has Not Successfuly Disabled {user.first_name} {user.last_name} to the system"
+            userLoggers(logger_name=request.user,device=userinfo,message=msg,level="INFO").save()
             return JsonResponse({'success': False, 'message': 'Not Successfully Disabled'})
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+
 @login_required(login_url='user_login')
 def myprofile(request):
     
@@ -108,6 +138,10 @@ def myprofile(request):
 
 @login_required(login_url='user_login')
 def changepassword(request):
+    
+    user_agent_string = request.META.get('HTTP_USER_AGENT')
+    user_agent = parse(user_agent_string)
+    userinfo = f'{ipaddress} / {user_agent}'
     
     if request.method == 'POST':
         id = request.POST.get('id')
@@ -121,14 +155,18 @@ def changepassword(request):
 
         
         if userupdatePassword:
-            msg = f"{userupdatePassword.first_name} {userupdatePassword.last_name}'s Successfully Changed Password"
+            info = f"{userupdatePassword.first_name} {userupdatePassword.last_name}'s Successfully Changed Password"
             response = {
                 'success': True,
-                'message': msg
+                'message': info
             }
+            msg = f"User Has Been Successfully Changed {userupdatePassword.first_name} {userupdatePassword.last_name}'s Password"
+            userLoggers(logger_name=request.user,device=userinfo,message=msg,level="INFO").save()
             return JsonResponse(response)
         else:
             messages.error(request,f"{userupdatePassword.username}'s Not Changed Password")
+            msg = f"User Has Not Successfully Changed {userupdatePassword.first_name} {userupdatePassword.last_name}'s Password"
+            userLoggers(logger_name=request.user,device=userinfo,message=msg,level="INFO").save()
             return redirect(myprofile)
     else:
 
