@@ -1,11 +1,15 @@
+import platform,socket
+from user_agents import parse
 from django.shortcuts import render,redirect,HttpResponse
-from ecmsapp.models import Enviroment,House,Renter
+from ecmsapp.models import Enviroment,House,Renter,userLoggers
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required, permission_required
 import json
 
 # Create your views here.
-
+p = platform.uname()
+host =socket.gethostname()
+ipaddress = socket.gethostbyname(host)
 
 @login_required(login_url='user_login')
 def enviroment(request):
@@ -21,16 +25,30 @@ def enviroment(request):
 
 @login_required(login_url='user_login')
 def createEnviroment(request):
+    user_agent_string = request.META.get('HTTP_USER_AGENT')
+    user_agent = parse(user_agent_string)
+    userinfo = f'{ipaddress} / {user_agent}'
     if request.method == 'POST':
         new_house = request.POST['houseno']
         new_renter = request.POST['renter']
         new_date = request.POST['regoster_date']
         new_status = request.POST['status']
 
+        house = House.objects.get(id=new_house)
+        renter = Renter.objects.get(id=new_renter)
+
         if new_house != "" and new_renter != "" and new_date != "" and new_status != "":
             # print(f"{new_date} {new_status} {new_house} {new_renter}")
-            add_environment = Enviroment(register_date=new_date,status=new_status,house_id=new_house,renter_id=new_renter,)
+            add_environment = Enviroment(register_date=new_date,status=new_status,house_id=house.id,renter_id=renter.id)
+            
             add_environment.save()
+            if add_environment.pk:
+                msg = f"{house.houseno} Was Been Successfuly Rented by {renter.name} and Added to the System"
+                userLoggers(logger_name=request.user,device=userinfo,message=msg,level="INFO").save()
+            else:
+                msg = f"{house.houseno} Was Not Successfuly Rented by {renter.name} and Not Added to the System"
+                userLoggers(logger_name=request.user,device=userinfo,message=msg,level="INFO").save()
+
             isError = True
             return HttpResponse(isError)
         else:
