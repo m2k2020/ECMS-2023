@@ -1,10 +1,11 @@
 from django.shortcuts import render,redirect,HttpResponse
 from ecmsapp.models import House
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 
-
+@login_required(login_url='user_login')
 def house(request):
     
     houses = House.objects.filter(status=0) 
@@ -14,7 +15,7 @@ def house(request):
     return render(request,'Enviroment/house.html',context)
 
 
-
+@login_required(login_url='user_login')
 def createHouse(request):
     if request.method == 'POST':
         new_district = request.POST['district']
@@ -32,7 +33,7 @@ def createHouse(request):
             return HttpResponse(isError)
 
 
-
+@login_required(login_url='user_login')
 def update_house(request):
     if request.method == 'POST':
         id = request.POST.get('id')
