@@ -1,7 +1,10 @@
+import platform,socket
+from user_agents import parse
 from django.shortcuts import render,redirect
 from ecmsapp.Code import *
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login,logout
+from ecmsapp.models import userLoggers
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.contrib.auth.decorators import login_required, permission_required
@@ -9,12 +12,23 @@ from django.contrib.auth.models import User, Group, Permission
 
 # Create your views here.
 
+p = platform.uname()
+host =socket.gethostname()
+ipaddress = socket.gethostbyname(host)
+
 @login_required(login_url='user_login')
 def logout_view(request):
-    logout(request)
-    messages.info(
-            request, 'Logout!')
-    return redirect('user_login')
+    if request.user.is_authenticated:
+        user_agent_string = request.META.get('HTTP_USER_AGENT')
+        user_agent = parse(user_agent_string)
+        userinfo = f'{ipaddress} / {user_agent}'
+        
+        logout(request)
+        messages.info(
+                request, 'Logout!')
+        msg = f"User Logged Out System"
+        userLoggers(logger_name=request.user,device=userinfo,message=msg,level="INFO").save()
+        return redirect('user_login')
 
 
 @login_required(login_url='user_login')
