@@ -1,6 +1,6 @@
 from django.urls import path
 from ecmsapp import views
-from .Code import Accounts,Cleaning,Enviroments,Houses,Payments,Renter,Reports,Transactions
+from .Code import Accounts,Cleaning,Enviroments,Houses,Logs,Payments,Renter,Transactions
 
 
 urlpatterns = [
@@ -53,7 +53,7 @@ urlpatterns = [
 
 
 
-    path('reports/', Reports.reports, name='reports'),
+    # path('reports/', Logs.reports, name='reports'),
     path('Payment_Method/', Payments.Payment_Method, name='Payment_Method'),
-    path('Reports2/', Reports.Reports2, name='Reports2'),
+    path('auditlogs/', Logs.AuditLogs, name='auditlogs'),
 ]
