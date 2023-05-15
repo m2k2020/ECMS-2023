@@ -3,10 +3,11 @@ from django.shortcuts import render,redirect
 from ecmsapp.models import Service,Transaction
 from datetime import date
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 
-
+@login_required(login_url='user_login')
 def transaction(request):
     serviceList = Service.objects.filter(status=0)
     alltransactions = Transaction.objects.filter(status=0)
@@ -24,7 +25,7 @@ def transaction(request):
     }
     return render(request,'Enviroment/Transaction.html',data)
 
-
+@login_required(login_url='user_login')
 def makePayment(request):
 
     if request.method == 'POST':
