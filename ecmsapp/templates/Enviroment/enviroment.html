@@ -49,18 +49,18 @@
                             <th>Renter</th>
                             <th>House</th>
                             <th>Date</th>
-                            <th>Action</th>
+                            <!-- <th>Action</th> -->
                           </tr>
                         </thead>
                         <tbody id="tbody_data">
 
                           {% for Enviroment in enviromentData %}
                           <tr>
-                            <td>{{ Enviroment.id }}</td>
+                            <td>{{ forloop.counter }}</td>
                             <td>{{ Enviroment.renter.name }}</td>
                             <td>{{ Enviroment.house.district }}-{{ Enviroment.house.houseno }} ({{ Enviroment.house.type }}) </td>
                             <td>{{ Enviroment.register_date }}</td>
-                            <td>
+                            <!-- <td>
                               <a 
                               class="btn btn-primary btn-sm EnviromentEdit" 
                               data-toggle="modal" 
@@ -77,17 +77,17 @@
                               </a>
                               
                                 
-                            </td>
+                            </td> -->
                           </tr>
                           {% endfor %}
                         </tbody>
                         <tfooter>
-                          <tr>
+                          <tr>>
                             <th>#</th>
-                            <th>District</th>
-                            <th>Enviroment Type</th>
-                            <th>Enviroment No</th>
-                            <th>Action</th>
+                            <th>Renter</th>
+                            <th>House</th>
+                            <th>Date</th>
+                            <!-- <th>Action</th> -->
                           </tr>
                         </tfooter>
 
