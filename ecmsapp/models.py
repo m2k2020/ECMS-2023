@@ -47,3 +47,12 @@ class Transaction(models.Model):
     date = models.DateField()
     status = models.IntegerField(default=0) # default 0 is active and 1 is deactivated
     service = models.ForeignKey(Service,on_delete= models.CASCADE)
+
+class userLoggers(models.Model):
+    level = models.CharField(max_length=10)
+    message = models.TextField()
+    device = models.TextField(null=True)
+    logger_name = models.CharField(max_length=30)
+    created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f'{self.logger_name}: {self.message}'
