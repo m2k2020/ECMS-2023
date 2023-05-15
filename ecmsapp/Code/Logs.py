@@ -7,7 +7,7 @@ from django.http import JsonResponse
 
 
 def AuditLogs(request):
-    logs = userLoggers.objects.all()
+    logs = userLoggers.objects.all().order_by('-id')
     data = {
         'auditLogs': logs
     }
