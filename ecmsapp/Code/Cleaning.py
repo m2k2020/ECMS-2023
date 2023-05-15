@@ -2,12 +2,14 @@ from django.shortcuts import render,redirect,HttpResponse
 from ecmsapp.models import Service,Enviroment,House
 from django.http import JsonResponse
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 
 
 
 
+@login_required(login_url='user_login')
 def cleaning(request):
     district =House.objects.values('district').distinct()
     
