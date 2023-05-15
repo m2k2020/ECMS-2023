@@ -1,13 +1,18 @@
+import platform,socket
 from django.shortcuts import render,redirect
-from .models import House,Renter,Enviroment,Service,Users,Transaction
+from .models import House,Renter,Enviroment,Service,Users,Transaction,userLoggers
 from django.http import JsonResponse
 from django.db.models import Sum
+from user_agents import parse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.auth.decorators import login_required, permission_required
 
 
+p = platform.uname()
+host =socket.gethostname()
+ipaddress = socket.gethostbyname(host)
 
 # Create your views here.
 @login_required(login_url='user_login')
@@ -57,10 +62,15 @@ def index(request):
         'MerchantAccount':merchant,
 
         }
+    
     return render(request, 'main.html',data)
 
 # @login_required(login_url='user_login')
 def user_login(request):
+     user_agent_string = request.META.get('HTTP_USER_AGENT')
+     user_agent = parse(user_agent_string)
+     userinfo = f'{ipaddress} / {user_agent}'
+
      if request.user.is_authenticated:
         # messages.info(request, 'alredy login')
         return redirect(index)
@@ -71,8 +81,12 @@ def user_login(request):
        
         if user is not None:
             login(request, user)
+            msg = f"User Logged System"
+            userLoggers(logger_name=request.user,device=userinfo,message=msg,level="INFO").save()
             return redirect('/')
         else:
+            msg = f"User Failed to login System"
+            userLoggers(logger_name=request.user,device=userinfo,message=msg,level="INFO").save()
             messages.info( request, 'User or Password are Incorrect.')
             return render(request,'index.html')
 
