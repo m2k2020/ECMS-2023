@@ -19,9 +19,6 @@
             <div class="card card-primary">
               <div class="card-header">
                 <h4>Login</h4>
-                {% if error_message %}
-                    <p>{{ error }}</p>
-                    {% endif %}
               </div>
               <div class="card-body">
                   <form method="POST" id="loginForm">
@@ -44,13 +41,22 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    {% for message in messages %}
+                    
+                    {% if messages %}
+                      {% for message in messages %}                    
+                      <div class="alert alert-info alert-has-icon alert-dismissible show fade">
+                        <!-- <div class="alert-icon"><i class="fas fa-times"></i></div> -->
+                        <div class="alert-body">
+                          <button class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                          </button>
+                          <div class="alert-title">{{message.error}}</div>
+                          {{message}}
+                        </div>
+                      </div>
+                      {%endfor%}
+                    {% endif %}
 
-                    <div class="alert alert-danger" role="alert">
-                      {{message}}
-                    </div>
-
-                    {%endfor%}
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                       Login
                     </button>
