@@ -1,12 +1,13 @@
 from django.shortcuts import render,redirect,HttpResponse
 from ecmsapp.models import Enviroment,House,Renter
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required, permission_required
 import json
 
 # Create your views here.
 
 
-
+@login_required(login_url='user_login')
 def enviroment(request):
     houses = House.objects.filter(status=0)
     renters = Renter.objects.filter(status=0)
@@ -18,7 +19,7 @@ def enviroment(request):
     }
     return render(request,'Enviroment/enviroment.html',context)
 
-
+@login_required(login_url='user_login')
 def createEnviroment(request):
     if request.method == 'POST':
         new_house = request.POST['houseno']
@@ -36,7 +37,7 @@ def createEnviroment(request):
             isError = False
             return HttpResponse(isError)
         
-
+@login_required(login_url='user_login')
 def get_environment(request):
     if request.method == "GET":
         env_id = request.GET.get('id')
