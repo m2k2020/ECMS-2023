@@ -1,10 +1,11 @@
 from django.shortcuts import render,redirect,HttpResponse
 from ecmsapp.models import Renter
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 
-
+@login_required(login_url='user_login')
 def renter(request):
        
     renters = Renter.objects.filter(status=0)
@@ -12,7 +13,7 @@ def renter(request):
     return render(request,'Enviroment/renter.html',context)
 
 
-
+@login_required(login_url='user_login')
 def createRenter(request):
     if request.method == 'POST':
         new_name = request.POST['name']
@@ -28,7 +29,7 @@ def createRenter(request):
         else:
             isError = False
             return HttpResponse(isError)
-
+@login_required(login_url='user_login')
 def update_renter(request):
     if request.method == 'POST':
         id = request.POST.get('id')
@@ -56,7 +57,7 @@ def update_renter(request):
         
     
 
-
+@login_required(login_url='user_login')
 def delete_renter(request):
     if request.method == 'POST':
         id = request.POST.get('id')
