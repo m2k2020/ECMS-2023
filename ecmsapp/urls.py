@@ -48,6 +48,8 @@ urlpatterns = [
     
     path('Transaction/', Transactions.transaction, name='Transaction'),
     path('makepayment/', Transactions.makePayment, name='makepayment'),
+    path('generateInvoice/', Transactions.generateInvoice, name='generateInvoice'),
+    path('printInvoice/', Transactions.printInvoice, name='printInvoice'),
 
 
 
