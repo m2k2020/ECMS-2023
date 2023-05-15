@@ -17,7 +17,7 @@ def logout_view(request):
     return redirect('user_login')
 
 
-
+@login_required(login_url='user_login')
 def staffs(request):
     users = User.objects.all()
     data = {
@@ -25,7 +25,7 @@ def staffs(request):
     }
     return render(request,'accounts/staffs.html',data)
 
-
+@login_required(login_url='user_login')
 def addUser(request):
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
@@ -50,7 +50,7 @@ def addUser(request):
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request method'})
     
-    
+@login_required(login_url='user_login')
 def activeAccount(request):
     if request.method == 'POST':
         id = request.POST.get('id')
@@ -70,7 +70,7 @@ def activeAccount(request):
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request method'})
     
-
+@login_required(login_url='user_login')
 def disableAccount(request):
     if request.method == 'POST':
         id = request.POST.get('id')
@@ -87,12 +87,12 @@ def disableAccount(request):
             return JsonResponse({'success': False, 'message': 'Not Successfully Disabled'})
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request method'})
-
+@login_required(login_url='user_login')
 def myprofile(request):
     
     return render (request, "accounts/myprofile.html")
 
-
+@login_required(login_url='user_login')
 def changepassword(request):
     
     if request.method == 'POST':
