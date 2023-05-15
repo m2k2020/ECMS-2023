@@ -5,9 +5,12 @@ from django.db.models import Sum
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.decorators import login_required, permission_required
+
 
 
 # Create your views here.
+@login_required(login_url='user_login')
 def index(request):
     exisitHouses = House.objects.filter(status=0)
     deleteHouses = House.objects.filter(status=1)
@@ -56,9 +59,10 @@ def index(request):
         }
     return render(request, 'main.html',data)
 
+# @login_required(login_url='user_login')
 def user_login(request):
      if request.user.is_authenticated:
-        messages.info(request, 'alredy login')
+        # messages.info(request, 'alredy login')
         return redirect(index)
      if request.method == 'POST':
         username = request.POST['username']
