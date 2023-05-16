@@ -1,5 +1,6 @@
 import platform,socket
 from user_agents import parse
+from datetime import date
 from django.shortcuts import render,redirect,HttpResponse
 from ecmsapp.models import Enviroment,House,Renter,userLoggers
 from django.http import JsonResponse
@@ -56,18 +57,37 @@ def createEnviroment(request):
             return HttpResponse(isError)
         
 @login_required(login_url='user_login')
-def get_environment(request):
-    if request.method == "GET":
-        env_id = request.GET.get('id')
-        env = Enviroment.objects.get(id=env_id)
-        data = {
-            'env_id': env.id,
-            'renter_name': env.renter.name,
-            'renter_id': env.renter.id,
-            'house_id': env.house.id,
-            'house_no': env.house.houseno
-        }
-        return JsonResponse(data)
+def transferEnviroment(request):
+    user_agent_string = request.META.get('HTTP_USER_AGENT')
+    user_agent = parse(user_agent_string)
+    userinfo = f'{ipaddress} / {user_agent}'
+    if request.method == "POST":
+        env_id = request.POST.get('uid')
+        renter = request.POST.get('renter')
+        renter_id = Renter.objects.get(id=renter)
+        transferEnv = Enviroment.objects.get(id=env_id)
+        old_renter = transferEnv.renter.name
+        # print(old_renter)
+        today = date.today()
+        transferEnv.renter = renter_id
+        transferEnv.register_date = today
+        transferEnv.save()
+        if transferEnv.pk:
+            info = f"({transferEnv.house.district}-{transferEnv.house.type}-{transferEnv.house.houseno})has been transfer from {old_renter} to {renter_id.name}."
+            userLoggers(logger_name=request.user,device=userinfo,message=info,level="INFO").save()
+            data = {
+                'succeeded': True,
+                'message':info
+            }
+            return JsonResponse(data)
+        else:
+            info = f"({transferEnv.house.district}-{transferEnv.house.type}-{transferEnv.house.houseno})has been Not transfer from {old_renter} to {renter_id.name}."
+            userLoggers(logger_name=request.user,device=userinfo,message=info,level="INFO").save()
+            data = {
+                'succeeded': False,
+                'message':info
+            }
+            return JsonResponse(data)
 
         # singleEnviroment = Enviroment.objects.filter(id=env_id).all()
         # for env in singleEnviroment:
