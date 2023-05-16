@@ -98,46 +98,52 @@ function EditEnviroment(){
     $('.EnviromentEdit').click(function(){
         
         $id = $(this).data('id');
+        $('#updateEnviroment').modal('show');
+        $('#uid').val($id)
+        
+        $("#updateForm").submit(function(e){
+            e.preventDefault();
+            $uid = $('#uid').val();
+            $renter = $('#urenter').val();
+            
+            $.ajax({
+                url: '/transferEnviroment/',
+                type: 'POST',
+                data: {
+                    'uid': $uid,
+                    'renter': $renter,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function(response){
+                    swal({
+                        title: "Success !",
+                        text: response.message,
+                        icon: "success",
+                        timer: 8000, // time in milliseconds
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    })
+                    // console.log(response)
+                    .then(function(){
 
-        $.ajax({
-            url: "/getEnviroment/",
-            type: "GET",
-            data: {
-                'id': $id
-            },
-            success:function (response){
+                        $('#updateEnviroment').hide();
+                        // readClean()
+                        location.reload();
+                    })
+                },
+                error:function(error){
+                    swal({
+                        title: "Error !",
+                        text: 'OPS Not Saved!',
+                        icon: "error",
+                        timer: 4000, // time in milliseconds
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    })
 
-                console.log(response)
-
-                $('#updateEnviroment').modal('show');
-
-                $house = response.house_no
-
-                $('#uid').val($house)
-                // $('#urenter').val($renter)
-                // $('#uregoster_date').val($date)
-                // $('#uid').val($renter)
-
-                
-                
-            },
-            error: function(response) {
-                // Handle errors
-                console.log('Error:', response);
-            }
+                }
+            })
         })
-        // $renter = $(this).data('renter');
-        // $house = $(this).data('house');
-        // $date = $(this).data('date');
-
-        // alert($id+ " " +$renter+ " " +$house + " " +$date)
-
-        // $('#updateEnviroment').modal('show');
-
-        // $('#uhouseno').val($house)
-        // $('#urenter').val($renter)
-        // $('#uregoster_date').val($date)
-        // $('#uid').val($renter)
 
 
 
