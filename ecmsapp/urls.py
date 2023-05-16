@@ -36,7 +36,7 @@ urlpatterns = [
 
     path('Enviroment/', Enviroments.enviroment, name='Enviroment'),
     path('createEnviroment/', Enviroments.createEnviroment, name='createEnviroment'),
-    path('getEnviroment/', Enviroments.get_environment, name='getEnviroment'),
+    path('transferEnviroment/', Enviroments.transferEnviroment, name='transferEnviroment'),
 
     #endregion
 
