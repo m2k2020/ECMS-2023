@@ -100,7 +100,7 @@ def generateInvoice(request):
 
 
 
-        print(f"{renter} {ref} {today}")
+        # print(f"{renter} {ref} {today}")
 
         response = {
             'success': True,
