@@ -49,7 +49,7 @@
                             <th>Renter</th>
                             <th>House</th>
                             <th>Date</th>
-                            <!-- <th>Action</th> -->
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody id="tbody_data">
@@ -60,24 +60,16 @@
                             <td>{{ Enviroment.renter.name }}</td>
                             <td>{{ Enviroment.house.district }}-{{ Enviroment.house.houseno }} ({{ Enviroment.house.type }}) </td>
                             <td>{{ Enviroment.register_date }}</td>
-                            <!-- <td>
+                            <td>
                               <a 
                               class="btn btn-primary btn-sm EnviromentEdit" 
                               data-toggle="modal" 
                               data-id="{{ Enviroment.id }}"
-                              data-renter="{{ Enviroment.renter.id }}"
-                              data-house="{{ Enviroment.house.district }}-{{ Enviroment.house.houseno }} ({{ Enviroment.house.type }})"
-                              data-date="{{ Enviroment.register_date }}"
+                              style="color: white;"
                               >
-                                <i data-feather="edit"></i>
-                              </a>
-
-                              <a class="btn btn-danger btn-sm EnviromentDelete" name="{{ Enviroment.id }}" data-toggle="modal" data-target="#updateEnviroment">
-                                <i data-feather="trash"></i>
-                              </a>
-                              
-                                
-                            </td> -->
+                                <i class="fas fa-exchange-alt"></i> Transfer House
+                              </a>  
+                            </td>
                           </tr>
                           {% endfor %}
                         </tbody>
@@ -163,10 +155,10 @@
 
          <!-- Update Modal -->
          <div class="modal fade" id="updateEnviroment" tabindex="-1" role="dialog" aria-labelledby="userRegister" aria-hidden="true">
-          <div class="modal-dialog" role="document">
+          <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="userRegister">Update Enviroment {{ Enviroment.id }}</h5>
+                <h5 class="modal-title" id="userRegister">Transfer Enviroment {{ Enviroment.id }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -178,14 +170,6 @@
 
                 <form method="POST" id="updateForm">
                   <div class="form-group">
-                    <label>House No</label>
-                    <select id="uhouseno" class="form-control" required>
-                      <option value="">Select......</option>
-                      {% for house in houseData %}
-                          <option value="{{house.id}}">{{house.district}} ({{house.type}}) ({{house.houseno}})</option>
-                      {% endfor %}
-                    </select>
-
                     <label>Renter</label>
                     <select id="urenter" class="form-control" required>
                       <option value="">Select......</option>
@@ -194,10 +178,7 @@
                       {% endfor %}
                       
                     </select>
-  
-                    <label>Martial Status</label>
-                    <input type="date" id="uregoster_date" class="form-control" required>
-                    <input type="text" id="uid" class="form-control" required>
+                    <input type="text" id="uid" class="form-control" required hidden>
 
                   
                   </div>
@@ -205,7 +186,7 @@
                   
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" id="btnSave" class="btn btn-primary">Save</button>                  
+                    <button type="submit" id="btnSave" class="btn btn-primary">Transfer</button>                  
         
                   </div>
 
