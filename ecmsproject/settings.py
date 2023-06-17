@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-h%rypd22pqh-x&(fy*h0=5e$46v!n4+lau*&)262no-%dl^lic
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.35.1.10']
 
 
 # Application definition
@@ -79,12 +79,12 @@ WSGI_APPLICATION = 'ecmsproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ecms_db',
-        'USER': 'postgres',
-        'PASSWORD': '0207', #kaliya waxaaa ku kala duwan nahay password data baseka aniga wuxuu yahay 0207 adigna midkaaga ka dhigo
+        'USER': 'osoc_user',
+        'PASSWORD': 'Pa$$word', #kaliya waxaaa ku kala duwan nahay password data baseka aniga wuxuu yahay 0207 adigna midkaaga ka dhigo
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '3306',
     }
 }
 
